@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: catalogo-postgres
+    environment:
+      POSTGRES_DB: mata76
+      POSTGRES_USER: mata76
+      POSTGRES_PASSWORD: mata76
+    ports:
+      - "5433:5432"
+    volumes:
+      - catalogo-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mata76 -d mata76"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  catalogo-pgdata:
